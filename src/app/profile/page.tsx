@@ -1,18 +1,18 @@
 import { getCurrentUser } from "@/db/user";
-import RegisterForm from "./RegisterForm";
 import { redirect } from "next/navigation";
 
-const RegisterPage = async () => {
+const ProfilePage = async () => {
   const user = await getCurrentUser();
 
-  if (user) {
-    redirect("/profile");
+  if (!user) {
+    redirect("/login");
   }
+
   return (
     <div>
-      <RegisterForm />
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
     </div>
   );
 };
-
-export default RegisterPage;
+export default ProfilePage;
